@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>原型模式</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        //原型模式 
+        function name(age){
+            name.prototype.age=age;
+            name.prototype.show=function(){
+                console.log(name.prototype.age);
+            };
+        }
+        var a=new name(12);
+        var b=new name(24);
+        a.show();//打印出来是24，为什么呢 ，因为 第二次 new 的时候 直接改变了 name.prototype里的age的值，可以打印a的实例看一下
+        console.log(a.age);//24
+        //都是写在函数原型的值，貌似解决了重复创建的问题，但是不适用于参数的传递，每次 实例化的 对象 传参都会覆盖之前的传参
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

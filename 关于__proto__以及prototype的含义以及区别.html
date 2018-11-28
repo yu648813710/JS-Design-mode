@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        //__proto__为隐形原型，prototype为显示原型，隐性原型对象和function对象都有，但是原型只有function对象有
+        //function也属于对象，属于特殊的函数对象
+        function a() {
+            this.name = "haha";
+            console.log(this);
+        };
+        var b = new a();
+
+
+        //a 与 new a()的区别 
+        console.log(a); //直接打印 函数名是 方法本身，
+        console.log(typeof a); //打印出来 是function 说明a是一个方法，没有实例化的就是方法
+        console.log(typeof new a()); //打印出来 是obj 说明实例出的a是一个对象 
+        console.log(new a()) //实例化后是对象 有隐性原型，__proto__，还有构造函数的属性 constructor 里面是构造函数的信息
+
+        //得出结论 new 的话可以new出一个函数对象 
+
+
+        //下来来看函数对象和普通对象有什么关系
+
+        var c = {};
+        console.log(c); //打印出来也有隐性原型和构造函数的信息
+
+        //看一下prototype在函数对象和普通对象上的区别
+        console.log(new a().prototype); //函数对象也是没有 prototype 的
+        console.log(c.prototype); //普通对象是没有 prototype 的
+
+
+        console.log(a.prototype); //打印出来是有的，有 constructor 里面是构造函数的信息，还有隐性原型信息,说明创建函数之后 系统会自动维护一个 显示原型属性，函数是有显性原型的
+        console.log(b.__proto__); //a函数的实例是一个对象B，b的隐性原型和a函数的显示原型貌似一样看一下是否相等，对象是有隐性原型的，
+        console.log(a.__proto__);//函数 无法直接打印出 隐性类型 __proto__ 可以直接打印出显性类型 prototype 
+        console.log(a.prototype == b.__proto__); //为true 说明是相等的
+
+        //那如果直接 使用 函数的 prototype 来增加方法属性 是否可以使用呢 ？
+
+        a.prototype.show = function () {
+            console.log(this.name);//打印出来是undifind 说明未经过 new 的，无法继承构造函数内部的东西  
+        }
+        // a.show();//执行失败
+        a.prototype.show(); //执行 成功 这块的 this 指向的是a的本身,说明是直接可以使用的，但是需要加原型
+
+        b.__proto__.show1 = function () {//实例下的隐性原型
+            console.log(this.name);
+        }
+        a.__proto__.show2=function(){//方法下的隐性原型
+            console.log(2);
+        }
+        a.show2();//执行成功
+        b.show1();//执行成功 ，说明 隐性原型 可以直接使用
+
+        //如果a下的 show要直接使用 ，那么 就需要 new 转化prototype 为隐性的原型
+        b.show();//调用的 还是 40行的代码
+        
+        //在javascript中, 通过new可以产生原对象的一个实例对象，而这个实例对象继承了原对象的属性和方法。因此，new存在的意义在于它实现了javascript中的继承，而不仅仅是实例化了一个对象！
+        //结论 就是 当 使用 new 一个方法的 实例时，其实是创造了一个方法数组，把这个方法显性的原型 prototype 转变为 隐性的 __proto__ ，让可以直接使用 构造函数的 属性 以及原型链上的方法
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

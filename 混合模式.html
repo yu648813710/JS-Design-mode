@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        /**********测试new的用途**********/
+        function show() {
+            console.log(this);
+        };
+        show(); //打印出来 是 window
+        new show(); //打印出来是一个叫 show的 对象，那说明当你在new一个函数时候 ，系统会帮你 做一步 var this=new Object();还会帮你最后把这个对象return出来
+
+
+        /**********混合模式**********///混合模式为 构造函数 与原型的混合，保证函数里不包含函数，负责会有重复创造函数的风险
+
+        function nameC(name, age) { //构造函数写属性，写不复用的东西
+            this.name = name;
+            this.age = age;
+        };
+        nameC.prototype.show = function () { //原型里写复用的东西
+            console.log(this.name + "," + this.age);
+        };
+        var a = new nameC("hah", 12); //实例出一个对象
+        var b = new nameC("啊是大", 13); //实例出一个对象
+        a.show();
+        b.show();
+        console.log(b.show == a.show); //打印出为true 因为 new出来的对象都公用了一个方法，所以是相等的
+        console.log(b.name == a.name); //打印出为false 因为 是构造函数中的参数每次不同
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

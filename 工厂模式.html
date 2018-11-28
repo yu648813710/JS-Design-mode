@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>工厂模式</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        //工厂模式
+        //事件属于谁 this就指向谁 //任何函数都可以加new
+        function name (name){//
+            var arr=new Object();//这称作实例，相当于实例是一个类的具象化，意思就是 new 一个新的对象时要赋予一个变量 就是实例  .原料
+            arr.show=function(){//加工
+                console.log(name);
+            };
+            return arr;//出口
+        };
+        var name1=name("11");
+        var name2=name("22");
+        console.log(name2==name1);//返回出来的数组不相等。为false，那么就存在一个问题 就是 在大量的使用下，每次都需要重新new新的数组 会造成内存泄漏，所以不好。
+        //缺点 
+        //1: 没有new 需要手动去new一个对象 需要手动的返回出来 
+        //2：每次new的对象不相同，造成资源浪费
+        
+       
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

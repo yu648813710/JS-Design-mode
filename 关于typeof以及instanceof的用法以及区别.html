@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        //先来测试typeof的用法
+        var a = [34, 4, 3, 54],
+            b = 34,
+            c = 'adsfas',
+            d = function () {
+                console.log('我是函数')
+            },
+            e = true,
+            f = null,
+            h = new Date(),
+            g;
+        console.log(typeof (a)); //object  //数组也是对象
+        console.log(typeof(b));//number 
+        console.log(typeof(c));//string 
+        console.log(typeof(d));//function 
+        console.log(typeof(e));//boolean 
+        console.log(typeof(f));//object  null也是对象
+        console.log(typeof(h));//object 函数的实例
+        console.log(typeof(g));//undefined
+      //typeof在判断null、array、object以及函数实例（new + 函数）时，得到的都是object。这使得在判断这些数据类型的时候，得不到真是的数据类型。由此引出instanceof。
+
+
+      //instanceof的用法
+      //概述：instanceof运算符用来判断一个构造函数的prototype属性所指向的对象是否存在另外一个要检测对象的原型链上，那说明必须是一个对象instanceof才有可能返回为true，说白了 就是 可以判断一个对象是不是原型上的实例对象
+      var aa='123';
+      console.log(aa instanceof String);//打印出来是false，说明aa没在string的原型链上，
+      var bb=new String("123");
+      console.log(bb instanceof String);//打印出来是true，说明bb在string的原型链上，因为是 new 出了一个新的对象，对象是有原型链的，所以bb为 string的实例，所以是true
+   </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
